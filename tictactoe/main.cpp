@@ -16,10 +16,17 @@
 //★★★★ Modify the program so that anytime the player is about to win (aka, they have 2 of 3 x's in a row, the computer will block w/ an o)
 
 #include <iostream>
-#include "titactoe.hpp"
+#include "tictactoe.hpp"
 
 int main(){
-
-  std::cin >> 
+  Board a_board;
+  // std::cout << "Would you like to play with another player or computer?";
+  // std::cout << "Please enter your choice (c for computer, p for 2nd player):;"
+  Player player1('o');
+  Player player2('x');
+  /*while(true){
+    std::cout << "First player will be \"o\"  and the second player will be \"x\"";
+    a_board.display_board();
+  }*/
   return 0;
 }

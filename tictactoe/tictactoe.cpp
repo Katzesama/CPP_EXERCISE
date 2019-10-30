@@ -6,11 +6,15 @@ Board::Board(){
   clear_board();
 }
 
-Board::mark_atile(int board_index, char pmarker){
+Board::~Board(){
+
+}
+
+bool Board::mark_atile(int board_index, char pmarker){
   int i = board_index - 1;
   char board_tile = board[i / board_dim][i % board_dim];
   //oops! occupied
-  if ( board_tile == "x" or board_tile == "o"){
+  if ( board_tile == 'x' or board_tile == 'o'){
     return false;
   }
   else{
@@ -20,14 +24,14 @@ Board::mark_atile(int board_index, char pmarker){
   }
 }
 
-Board::clear_board(){
+void Board::clear_board(){
   for (int i = 0; i < board_dim*board_dim; i++){
     board[i / board_dim][i % board_dim] = '1' + i;
   }
   filled = 0;
 }
 
-Board::display_board(){
+void Board::display_board(){
   for (int i = 0; i < board_dim; i++){
     for (int j = 0; j < board_dim; j++)
     {
@@ -37,39 +41,42 @@ Board::display_board(){
   }
 }
 
-Board::get_tile_mark(int row, int col){
+char Board::get_tile_mark(int row, int col){
   return board[row][col];
 }
 
-Board::is_full(){
+bool Board::is_full(){
   if (filled >= board_dim * board_dim){
     return true;
   }
   return false;
 }
 
-Board::~Board(){
-
-}
 
 Player::Player(char new_marker){
   marker = new_marker;
-}
-
-Player::get_marker(){
-  return marker;
 }
 
 Player::~Player(){
 
 }
 
+char Player::get_marker(){
+  return marker;
+}
+
+
+
 Tictactoe::Tictactoe(){
     reset();
 }
 
+Tictactoe::~Tictactoe(){
+
+}
+
 //bool
-Tictactoe::is_win(Board &board){
+bool Tictactoe::is_win(Board &board, Player &player){
   //horizontal
   for (int i = 0; i < board_dim; i++){
     if (board.get_tile_mark(i, 0) == board.get_tile_mark(i, 1) && board.get_tile_mark(i, 1) == board.get_tile_mark(i, 2)){
@@ -99,30 +106,27 @@ Tictactoe::is_win(Board &board){
 }
 
 //bool
-Tictactoe::is_tie(Board &board){
-  if (winner == 'n' && board.is_full()){
+bool Tictactoe::is_tie(Board &board, Player &player){
+  if (winner == "None" && board.is_full()){
     return true;
   }
   return false;
 }
 
 //bool
-Tictactoe::play_again(){
-
+bool Tictactoe::play_again(){
+  return true;
 }
 
-Tictactoe::get_winner(){
+std::string Tictactoe::get_winner(){
   return winner;
 }
 
-Tictactoe::reset(){
-  winner = "n";
+void Tictactoe::reset(){
+  winner = "None";
 }
 
-Tictactoe::~Tictactoe(){
-
-}
-
+/*
 //int
 Computer_player::int play_random(){}
 //int
@@ -132,3 +136,4 @@ Computer_player::Computer_player(){}
 Computer_player::set_level(int setNaive){}
 Computer_player::get_level(){}
 Computer_player::~Computer_player(){}
+*/

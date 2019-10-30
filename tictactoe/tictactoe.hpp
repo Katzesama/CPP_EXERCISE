@@ -2,23 +2,14 @@
 
 #define board_dim 3
 
-class Tictactoe{
-char winner;
-public:
-  Tictactoe();
-  bool is_win(Board &board, Player &player);
-  bool is_tie(Board &board, Player &player);
-  bool play_again();
-  char get_winner();
-  void reset();
-  ~Tictactoe();
-};
+
 
 class Board{
   char board[board_dim][board_dim];
   int filled;
 public:
   Board();
+  ~Board();
   // check valid move when change the tile
   bool mark_atile(int board_ibdex, char pmarker);
   void clear_board();
@@ -26,7 +17,6 @@ public:
   char get_tile_mark(int row, int col);
   bool is_full();
   //void get_empty_spot();
-  ~Board();
 
 };
 
@@ -35,12 +25,24 @@ class Player{
 
 public:
   Player(char new_marker);
-  char get_marker();
   ~Player();
+  char get_marker();
 
 };
 
-class Computer_player{
+class Tictactoe{
+std::string winner;
+public:
+  Tictactoe();
+  ~Tictactoe();
+  bool is_win(Board &board, Player &player);
+  bool is_tie(Board &board, Player &player);
+  bool play_again();
+  std::string get_winner();
+  void reset();
+};
+
+/*class Computer_player{
   int ifNaive;
 private:
   int play_random();
@@ -51,4 +53,4 @@ public:
   void set_level(int setNaive);
   int get_level();
   ~Computer_player();
-};
+};*/
