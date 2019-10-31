@@ -11,10 +11,17 @@ Board::~Board(){
 }
 
 bool Board::mark_atile(int board_index, char pmarker){
+  //validate the input
+  if ( board_index >= 10 || board_index <= 0 ){
+    std::cout << "The number you entered is out of range.\n";
+    std::cout << "Pleas try again.\n";
+    return false;
+  }
   int i = board_index - 1;
   char board_tile = board[i / board_dim][i % board_dim];
   //oops! occupied
   if ( board_tile == 'x' or board_tile == 'o'){
+    std::cout << "Occupied!";
     return false;
   }
   else{
@@ -76,7 +83,7 @@ Tictactoe::~Tictactoe(){
 }
 
 //bool
-bool Tictactoe::is_win(Board &board, Player &player){
+bool Tictactoe::is_win(Board &board){
   //horizontal
   for (int i = 0; i < board_dim; i++){
     if (board.get_tile_mark(i, 0) == board.get_tile_mark(i, 1) && board.get_tile_mark(i, 1) == board.get_tile_mark(i, 2)){
@@ -106,8 +113,8 @@ bool Tictactoe::is_win(Board &board, Player &player){
 }
 
 //bool
-bool Tictactoe::is_tie(Board &board, Player &player){
-  if (winner == "None" && board.is_full()){
+bool Tictactoe::is_tie(Board &board){
+  if (winner == 'n' && board.is_full()){
     return true;
   }
   return false;
@@ -115,15 +122,26 @@ bool Tictactoe::is_tie(Board &board, Player &player){
 
 //bool
 bool Tictactoe::play_again(){
-  return true;
+  std::string again;
+  while (true){
+    std::cout << "Do you want to play again?(y or n):";
+    std::cin >> again;
+    if (again == "y"){
+      return true;
+    }
+    else if(again == "n"){
+      return false;
+    }
+    std::cout << "Wrong input value!\n";
+  }
 }
 
-std::string Tictactoe::get_winner(){
+char Tictactoe::get_winner(){
   return winner;
 }
 
 void Tictactoe::reset(){
-  winner = "None";
+  winner = 'n';
 }
 
 /*

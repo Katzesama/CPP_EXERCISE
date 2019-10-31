@@ -31,14 +31,14 @@ public:
 };
 
 class Tictactoe{
-std::string winner;
+char winner;
 public:
   Tictactoe();
   ~Tictactoe();
-  bool is_win(Board &board, Player &player);
-  bool is_tie(Board &board, Player &player);
+  bool is_win(Board &board);
+  bool is_tie(Board &board);
   bool play_again();
-  std::string get_winner();
+  char get_winner();
   void reset();
 };
 
