@@ -6,11 +6,10 @@ class GameControl{
 public:
   GameControl(){}
   ~GameControl();
-  void GameStart();
   int PlayGame();
   int Menu();
   void Game();
-  int GameOver();
+  bool GameOver();
   void ClearScreen();
 private:
   int key;

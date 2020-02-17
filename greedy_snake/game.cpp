@@ -5,13 +5,14 @@
 GameControl::~GameControl(){
 }
 
-void GameControl::GameStart(){
-  ClearScreen();
-  board.Print();
-}
 
 int GameControl::PlayGame(){
+  ClearScreen();
+  board.Print();
+  
+  while (!GameOver()){
 
+  }
 }
 
 int GameControl::Menu(){
@@ -47,7 +48,7 @@ void GameControl::Game(){
     switch (choice)
       {
       case 1:
-        GameStart();
+        PlayGame();
         break;
       case 2:
         break;
@@ -55,8 +56,14 @@ void GameControl::Game(){
 
 }
 
-int GameControl::GameOver(){
-
+bool GameControl::GameOver(){
+  if (board.HitWall()){
+    return true;
+  }
+  if (board.HitSnake()){
+    return true;
+  }
+  return false;
 }
 
 void GameControl::ClearScreen(){

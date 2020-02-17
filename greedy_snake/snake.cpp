@@ -1,6 +1,7 @@
 #include <iostream>
 #include "snake.h"
 
+#define SLENGTH 2
 
 Snake::Snake(){
   direct = left;
@@ -14,18 +15,22 @@ void Snake::Move(){
 
 }
 
-bool Snake::ChangeDirection(){
+bool Snake::ChangeDirection(const char d){
 
 }
 
-bool Snake::HitSelf(){
-
-}
 
 bool Snake::Eat(){
 
 }
 
-void Snake::SetHead(const int x, const int y){
+void Snake::Grow(){
+
+}
+
+void Snake::InitialSnake(const int x, const int y){
   head.ChangePosition(x, y);
+  for (int i = 1; i <= SLENGTH; i++){
+    body.push_back(Point(x, y+i));
+  }
 }

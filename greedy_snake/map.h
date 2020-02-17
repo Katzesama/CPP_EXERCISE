@@ -8,6 +8,7 @@ class Map{
 public:
   Map();
   ~Map();
+  void SetPoints();
   void MoveSnake();
   void Print();
   bool HitWall();
