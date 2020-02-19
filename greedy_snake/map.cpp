@@ -76,7 +76,7 @@ void Map::Print(){
 
 bool Map::HitWallorSnake(){
   Point head = snake.getHead();
-  return (map[head.GetX()][head.GetY()] == BOARDER) || (map[head.GetX()][head.GetY()] == SNAKEPOINT);
+  return (map[head.GetX()][head.GetY()] == BOARDER) || snake.HitSelf();
 }
 
 bool Map::is_Eat(){

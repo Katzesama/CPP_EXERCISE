@@ -9,11 +9,19 @@ GameControl::~GameControl(){
 int GameControl::PlayGame(){
   while (!GameOver()){
     ClearScreen();
-    board.Print();
-    key = getchar();
-    board.MoveSnake(key);
     board.SetPoints();
+    board.Print();
+    std::cin >> key;
+    std::cout << key <<'\n';
+    board.MoveSnake(key);
   }
+  std::cout << "********************************\n";
+  std::cout << "          Game Over!\n";
+  std::cout << " Enter any key to return to menu\n";
+  std::cout << "********************************\n";
+  char c;
+  std::cin >> c;
+  ClearScreen();
 }
 
 int GameControl::Menu(){
@@ -45,15 +53,20 @@ int GameControl::Menu(){
 }
 
 void GameControl::Game(){
-    int choice = Menu();
-    switch (choice)
-      {
-      case 1:
-        PlayGame();
-        break;
-      case 2:
-        break;
-      }
+    int choice;
+    do{
+      choice= Menu();
+      switch (choice)
+        {
+        case 1:
+          PlayGame();
+          break;
+        case 2:
+          ClearScreen();
+          std::cout << "Have a Nice Day!\n";
+          break;
+        }
+      }while(choice != 2);
 
 }
 
@@ -68,9 +81,4 @@ void GameControl::ClearScreen(){
   //https://stackoverflow.com/questions/35813318/how-to-refresh-terminal-page-in-c
   //Thomas Dickey
   std::cout << "\033[2J\033[H";
-}
-
-int main(){
-  GameControl gsnake;
-  gsnake.Game();
 }

@@ -15,6 +15,7 @@ public:
   void Grow(Point growth);
   bool ChangeDirection(const char d);
   bool Eat(Point food);
+  bool HitSelf();
   void InitialSnake(const int x, const int y);
   Point& getHead() { return this->head; }
   std::list<Point>& getbody(){ return this->body; }

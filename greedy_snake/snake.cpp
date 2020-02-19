@@ -87,6 +87,15 @@ void Snake::Grow(Point growth){
   body.push_back(growth);
 }
 
+bool Snake::HitSelf(){
+  for(std::list<Point>::iterator bo = body.begin(); bo != body.end(); bo++)
+  {
+    if (head == *bo){
+      return true;
+    }
+  }
+  return false;
+}
 void Snake::InitialSnake(const int x, const int y){
   head.ChangePosition(x, y);
   for (int i = 1; i <= SLENGTH; i++){
