@@ -5,16 +5,16 @@
 #include "point.h"
 
 
-extern enum direction{up, down, left, right};
+enum direction{up, down, left, right};
 
 class Snake{
 public:
   Snake();
   ~Snake();
-  void Move();
-  void Grow();
+  Point Move();
+  void Grow(Point growth);
   bool ChangeDirection(const char d);
-  bool Eat();
+  bool Eat(Point food);
   void InitialSnake(const int x, const int y);
   Point& getHead() { return this->head; }
   std::list<Point>& getbody(){ return this->body; }

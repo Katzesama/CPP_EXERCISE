@@ -12,7 +12,7 @@ public:
   bool GameOver();
   void ClearScreen();
 private:
-  int key;
+  char key;
   Map board;
 };
 

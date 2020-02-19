@@ -1,5 +1,6 @@
 #include <iostream>
 #include <list>
+#include <stdlib.h>
 #include "map.h"
 
 #define WIDTH 60
@@ -7,7 +8,7 @@
 #define BOARDER '*'
 #define FOOD '@'
 #define SNAKEPOINT 'o'
-
+#define SNAKEHEAD '8'
 
 
 Map::Map(){
@@ -38,18 +39,28 @@ void Map::SetPoints(){
         for (int j = 1; j < width-1; j++)
             map[i][j] = ' ';
   }
-  map[food.GetX()][food.GetY()] = FOOD;
-
   Point head = snake.getHead();
-  map[head.GetX()][head.GetY()] = SNAKEPOINT;
+  map[head.GetX()][head.GetY()] = SNAKEHEAD;
   //https://thispointer.com/c-different-ways-to-iterate-over-a-list-of-objects/
   for (std::list<Point>::iterator sbody = snake.getbody().begin(); sbody != snake.getbody().end(); sbody++)
 {
 	map[sbody->GetX()][sbody->GetY()] = SNAKEPOINT;
 }
+  map[food.GetX()][food.GetY()] = FOOD;
 }
 
-void Map::MoveSnake(const direction d){
+void Map::MoveSnake(char key){
+    snake.ChangeDirection(key);
+  Point last_point = snake.Move();
+  if (is_Eat()){
+    snake.Grow(last_point);
+    int nfx, nfy;
+    do{
+      nfx = std::rand() % (height - 1) + 1;
+      nfy = std::rand() % (width - 1) + 1;
+    }while(map[nfx][nfy] == FOOD || map[nfx][nfy] == SNAKEPOINT);
+    food.ChangePosition(nfx, nfy);
+  }
 
 }
 
@@ -63,13 +74,13 @@ void Map::Print(){
   }
 }
 
-bool Map::HitWall(){
+bool Map::HitWallorSnake(){
   Point head = snake.getHead();
-  return map[head.GetX()][head.GetY()] == BOARDER;
+  return (map[head.GetX()][head.GetY()] == BOARDER) || (map[head.GetX()][head.GetY()] == SNAKEPOINT);
 }
 
-bool Map::HitSnake(){
-  
+bool Map::is_Eat(){
+  return snake.Eat(food);
 }
 
 void Map::SetBoarder(){

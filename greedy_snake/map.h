@@ -9,9 +9,10 @@ public:
   Map();
   ~Map();
   void SetPoints();
-  void MoveSnake();
+  void MoveSnake(char key);
   void Print();
-  bool HitWall();
+  bool is_Eat();
+  bool HitWallorSnake();
   void SetBoarder();
 private:
   char** map;

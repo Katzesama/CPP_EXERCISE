@@ -7,11 +7,12 @@ GameControl::~GameControl(){
 
 
 int GameControl::PlayGame(){
-  ClearScreen();
-  board.Print();
-  
   while (!GameOver()){
-
+    ClearScreen();
+    board.Print();
+    key = getchar();
+    board.MoveSnake(key);
+    board.SetPoints();
   }
 }
 
@@ -57,10 +58,7 @@ void GameControl::Game(){
 }
 
 bool GameControl::GameOver(){
-  if (board.HitWall()){
-    return true;
-  }
-  if (board.HitSnake()){
+  if (board.HitWallorSnake()){
     return true;
   }
   return false;
